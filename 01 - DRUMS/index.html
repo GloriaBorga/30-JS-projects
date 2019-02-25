@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Drum Kit</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="animation-container">
+            <img class="cat-1" id="image" alt="bongo-cat" src="css/cat-1.png">
+        </div>
+        <div class="keys">
+            <div data-key="a" class="key">
+                <kbd>A</kbd>
+                <span class="sound">clap</span>
+            </div>
+            <div data-key="s" class="key">
+                <kbd>S</kbd>
+                <span class="sound">hihat</span>
+            </div>
+            <div data-key="d" class="key">
+                <kbd>D</kbd>
+                <span class="sound">kick</span>
+            </div>
+            <div data-key="f" class="key">
+                <kbd>F</kbd>
+                <span class="sound">openhat</span>
+            </div>
+            <div data-key="g" class="key">
+                <kbd>G</kbd>
+                <span class="sound">boom</span>
+            </div>
+            <div data-key="h" class="key">
+                <kbd>H</kbd>
+                <span class="sound">ride</span>
+            </div>
+            <div data-key="j" class="key">
+                <kbd>J</kbd>
+                <span class="sound">snare</span> <!-- werbel -->
+            </div>
+            <div data-key="k" class="key">
+                <kbd>K</kbd>
+                <span class="sound">tom</span>
+            </div>
+            <div data-key="l" class="key">
+                <kbd>L</kbd>
+                <span class="sound">tink</span>
+            </div>
+        </div>
+    </div>
+
+    <audio data-key="a" src="Sounds/clap.wav"></audio>
+    <audio data-key="s" src="Sounds/hihat.wav"></audio>
+    <audio data-key="d" src="Sounds/kick.wav"></audio>
+    <audio data-key="f" src="Sounds/openhat.wav"></audio>
+    <audio data-key="g" src="Sounds/boom.wav"></audio>
+    <audio data-key="h" src="Sounds/ride.wav"></audio>
+    <audio data-key="j" src="Sounds/snare.wav"></audio>
+    <audio data-key="k" src="Sounds/tom.wav"></audio>
+    <audio data-key="l" src="Sounds/tink.wav"></audio>
+
+    <script>
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            e.target.classList.remove('playing');
+        }
+
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.key}"]`);
+            const key = document.querySelector(`div[data-key="${e.key}"]`);
+            if (!audio) return;
+
+            key.classList.add('playing');
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+
+
+
+
+        window.addEventListener('keydown', function (e) {
+            playSound(e);
+
+
+            if (e.key === "a") {
+                console.log("if 1");
+                document.getElementById("image").src = "css/cat-5.png";
+                setTimeout(`document.getElementById("image").src = "css/cat-1.png";`, 100);
+            } else if (e.key === "s") {
+                console.log("if 2");
+                document.getElementById("image").src = "css/cat-3.png";
+                setTimeout(`document.getElementById("image").src = "css/cat-1.png";`, 100);
+            } else if (e.key === "d") {
+                console.log("if 3");
+                document.getElementById("image").src = "css/cat-4.png";
+                setTimeout(`document.getElementById("image").src = "css/cat-1.png";`, 100);
+            } else if (e.key === "f") {
+                console.log("if 4");
+                document.getElementById("image").src = "css/cat-2.png";
+                setTimeout(`document.getElementById("image").src = "css/cat-1.png";`, 100);
+            } else {
+                console.log("else")
+                document.getElementById("image").src = "css/cat-1.png";
+            }
+
+            
+            
+
+        });
+    </script>
+</body>
+</html>
